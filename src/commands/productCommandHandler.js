@@ -17,12 +17,7 @@ class ProductCommandHandler {
   }
 
   async changeStock({ id, quantity, session }) {
-    const product = await productRepository.changeStock(
-      { id, quantity },
-      { session }
-    );
-
-    return product;
+    return productRepository.changeStock({ id, quantity }, { session });
   }
 }
 

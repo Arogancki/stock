@@ -1,4 +1,3 @@
-const CustomError = require('../errors/custom');
 const productRepository = require('../repositories/productRepository');
 
 class ProductQueryHandler {
@@ -6,17 +5,12 @@ class ProductQueryHandler {
     return productRepository.getAll();
   }
 
-  async getByIds(ids) {
-    const products = await Promise.all(
-      ids.map((id) => productRepository.getById(id))
-    );
-    const productIndex = products.findIndex((p) => !p);
+  async getByIds(ids, session) {
+    return Promise.all(ids.map((id) => productRepository.getById(id, session)));
+  }
 
-    if (productIndex !== -1) {
-      throw new CustomError(`Not found ${products[productIndex]}`, 404);
-    }
-
-    return products;
+  async get(id, session) {
+    return productRepository.getById(id, session);
   }
 }
 
