@@ -1,0 +1,38 @@
+### Requirements
+
+Node --version (lts) - v22.14.0
+Mongo db with replica sets for transactions
+
+### How to run
+
+```
+npm i
+npm run dev
+```
+
+### How to test
+
+```
+npm run test
+```
+
+### example queries
+
+curl -X POST http://localhost:3000/products \
+ -H "Content-Type: application/json" \
+ -d '{"name":"food", "description": "good food", "price": 2, "stock" :3}'
+
+curl -X GET http://localhost:3000/products \
+ -H "Content-Type: application/json"
+
+curl -X POST http://localhost:3000/products/67d5bd43903afeb9fcde346c/sell \
+ -H "Content-Type: application/json" \
+ -d '{"quantity" :3}'
+
+curl -X POST http://localhost:3000/products/67d5bd43903afeb9fcde346c/restock \
+ -H "Content-Type: application/json" \
+ -d '{"quantity" :3}'
+
+curl -X POST http://localhost:3000/orders -H "Content-Type: application/json" -d '{"customerId" :3, "products": ["67d5cc14cd66cc98bd9cf439", "67d5cc14cd66cc98bd9cf439"]}'
+
+### Feedback
